@@ -4,7 +4,7 @@ import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { useState } from "react";
 import superjson from "superjson";
 // Import the generated route tree
-import { AppRouter } from "@repo/trpc/root";
+import { AppRouter } from "@repo/trpc";
 import { TRPCProvider } from "./utils/trpc";
 import { routeTree } from "./routeTree.gen";
 
