@@ -1,6 +1,6 @@
 import * as process from "node:process";
 import { auth } from "@repo/auth";
-import registerTrpc from "@repo/trpc";
+import registerTrpc from "index";
 import * as dotenv from "dotenv";
 import fastify from "fastify";
 import FastifyBetterAuth from "fastify-better-auth";

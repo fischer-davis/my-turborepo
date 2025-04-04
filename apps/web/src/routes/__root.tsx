@@ -23,7 +23,7 @@ const Root = () => {
   // }, [isPending]);
 
   const trpc = useTRPC();
-  const { data: session, isPending } = useQuery();
+  const { data: session, isPending } = useQuery(trpc.file.hello.queryOptions());
   return (
     <>
       <Outlet />
