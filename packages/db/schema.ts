@@ -6,7 +6,7 @@ import {
   unique,
 } from "drizzle-orm/sqlite-core";
 
-export const createTable = sqliteTableCreator((name) => `ghost-drop_${name}`);
+export const createTable = sqliteTableCreator((name) => `my-turborepo_${name}`);
 
 function createdAtField() {
   return integer("created_at", { mode: "timestamp" })

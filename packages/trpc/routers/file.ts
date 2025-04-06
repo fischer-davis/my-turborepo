@@ -5,7 +5,7 @@ import { files } from "@repo/db/schema";
 
 export const fileRouter = router({
   hello: publicProcedure.query(() => {
-    return "world";
+    return "Hello World";
   }),
   saveFileMetadata: publicProcedure
     .input(

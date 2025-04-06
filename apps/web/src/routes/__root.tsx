@@ -1,5 +1,5 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { createRootRoute, Outlet, useRouter } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { useTRPC } from "../utils/trpc";
 import { useQuery } from "@tanstack/react-query";
@@ -8,7 +8,7 @@ export const Route = createRootRoute({
   component: Root,
 });
 
-const Root = () => {
+function Root() {
   // const { data: session, isPending } = authClient.useSession();
   // const router = useRouter();
   //
@@ -23,10 +23,16 @@ const Root = () => {
   // }, [isPending]);
 
   const trpc = useTRPC();
-  const { data: session, isPending } = useQuery(trpc.file.hello.queryOptions());
+  const { data, isPending } = useQuery(trpc.file.hello.queryOptions());
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Outlet />
+      <>{data}</>
       <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
       <TanStackRouterDevtools position="bottom-left" />
     </>
