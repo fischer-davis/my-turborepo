@@ -10,123 +10,142 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as IndexImport } from "./routes/index";
-import { Route as SettingsImport } from "./routes/settings";
-import { Route as SigninImport } from "./routes/signin";
-import { Route as SignupImport } from "./routes/signup";
+import { Route as rootRoute } from './routes/__root'
+import { Route as SignupImport } from './routes/signup'
+import { Route as SigninImport } from './routes/signin'
+import { Route as SettingsImport } from './routes/settings'
+import { Route as PostsImport } from './routes/posts'
+import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
 const SignupRoute = SignupImport.update({
-  id: "/signup",
-  path: "/signup",
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const SigninRoute = SigninImport.update({
-  id: "/signin",
-  path: "/signin",
+  id: '/signin',
+  path: '/signin',
   getParentRoute: () => rootRoute,
-} as any);
-
-const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const SettingsRoute = SettingsImport.update({
-  id: "/settings",
-  path: "/settings",
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
+
+const PostsRoute = PostsImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const IndexRoute = IndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/signin": {
-      id: "/signin";
-      path: "/signin";
-      fullPath: "/signin";
-      preLoaderRoute: typeof SigninImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/signup": {
-      id: "/signup";
-      path: "/signup";
-      fullPath: "/signup";
-      preLoaderRoute: typeof SignupImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/settings": {
-      id: "/settings";
-      path: "/settings";
-      fullPath: "/settings";
-      preLoaderRoute: typeof SettingsImport;
-      parentRoute: typeof rootRoute;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/posts': {
+      id: '/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof PostsImport
+      parentRoute: typeof rootRoute
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsImport
+      parentRoute: typeof rootRoute
+    }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninImport
+      parentRoute: typeof rootRoute
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/signin": typeof SigninRoute;
-  "/signup": typeof SignupRoute;
-  "/settings": typeof SettingsRoute;
+  '/': typeof IndexRoute
+  '/posts': typeof PostsRoute
+  '/settings': typeof SettingsRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/signin": typeof SigninRoute;
-  "/signup": typeof SignupRoute;
-  "/settings": typeof SettingsRoute;
+  '/': typeof IndexRoute
+  '/posts': typeof PostsRoute
+  '/settings': typeof SettingsRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/signin": typeof SigninRoute;
-  "/signup": typeof SignupRoute;
-  "/settings": typeof SettingsRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/posts': typeof PostsRoute
+  '/settings': typeof SettingsRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/signin" | "/signup" | "/settings";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/signin" | "/signup" | "/settings";
-  id: "__root__" | "/" | "/signin" | "/signup" | "/settings";
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/posts' | '/settings' | '/signin' | '/signup'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/posts' | '/settings' | '/signin' | '/signup'
+  id: '__root__' | '/' | '/posts' | '/settings' | '/signin' | '/signup'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  SigninRoute: typeof SigninRoute;
-  SignupRoute: typeof SignupRoute;
-  SettingsRoute: typeof SettingsRoute;
+  IndexRoute: typeof IndexRoute
+  PostsRoute: typeof PostsRoute
+  SettingsRoute: typeof SettingsRoute
+  SigninRoute: typeof SigninRoute
+  SignupRoute: typeof SignupRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PostsRoute: PostsRoute,
+  SettingsRoute: SettingsRoute,
   SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
-  SettingsRoute: SettingsRoute,
-};
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -135,6 +154,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/posts",
+        "/settings",
         "/signin",
         "/signup"
       ]
@@ -142,14 +163,17 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+    "/posts": {
+      "filePath": "posts.tsx"
+    },
+    "/settings": {
+      "filePath": "settings.tsx"
+    },
     "/signin": {
       "filePath": "signin.tsx"
     },
     "/signup": {
       "filePath": "signup.tsx"
-    },
-    "/settings": {
-      "filePath": "settings.tsx"
     }
   }
 }

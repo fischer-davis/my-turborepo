@@ -76,6 +76,22 @@ export const verification = createTable("verification", {
   updatedAt: integer("updated_at", { mode: "timestamp" }),
 });
 
+export const posts = createTable("posts", {
+  id: text("id")
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  authorId: text("author_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  createdAt: createdAtField(),
+  updatedAt: integer("updated_at", { mode: "timestamp" })
+    .notNull()
+    .$defaultFn(() => new Date()),
+});
+
 export const apiKeys = createTable(
   "apiKey",
   {

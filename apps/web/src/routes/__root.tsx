@@ -1,5 +1,5 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { useTRPC } from "../utils/trpc";
 import { useQuery } from "@tanstack/react-query";
@@ -31,8 +31,19 @@ function Root() {
 
   return (
     <>
-      <Outlet />
-      <>{data}</>
+      <nav className="bg-gray-800 text-white p-4">
+        <div className="container mx-auto flex items-center justify-between">
+          <div className="text-xl font-bold">My App</div>
+          <div className="flex space-x-4">
+            <Link to="/" className="hover:text-gray-300">Home</Link>
+            <Link to="/posts" className="hover:text-gray-300">Posts</Link>
+            <Link to="/settings" className="hover:text-gray-300">Settings</Link>
+          </div>
+        </div>
+      </nav>
+      <main className="container mx-auto">
+        <Outlet />
+      </main>
       <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
       <TanStackRouterDevtools position="bottom-left" />
     </>

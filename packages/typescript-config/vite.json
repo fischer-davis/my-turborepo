@@ -1,7 +1,8 @@
 {
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ESNEXT",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
