@@ -6,6 +6,10 @@ import { posts } from "@repo/db/schema";
 export const postRouter = router({
   // Get all posts
   getAllPosts: publicProcedure.query(async ({ ctx }) => {
+    const tables = await ctx.db.select().from(posts).orderBy(desc(posts.createdAt));
+    console.log('Available tables:', tables);
+
+
     return ctx.db.select().from(posts).orderBy(desc(posts.createdAt));
   }),
   
