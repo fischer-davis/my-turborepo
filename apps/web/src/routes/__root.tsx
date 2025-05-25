@@ -23,7 +23,7 @@ function Root() {
   // }, [isPending]);
 
   const trpc = useTRPC();
-  const { data, isPending } = useQuery(trpc.file.hello.queryOptions());
+  const { isPending } = useQuery(trpc.file.hello.queryOptions());
 
   if (isPending) {
     return <div>Loading...</div>;

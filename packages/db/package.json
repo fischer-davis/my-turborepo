@@ -7,7 +7,6 @@
   },
   "license": "MIT",
   "scripts": {
-    "lint": "eslint \"**/*.ts\"",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
@@ -20,10 +19,8 @@
     "drizzle-orm": "^0.41.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "drizzle-kit": "^0.30.6",
-    "eslint": "^8.57.0",
     "typescript": "5.5.4"
   }
 }
