@@ -1,51 +1,58 @@
+import { authClient } from "@repo/auth/auth-client";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+	Link,
+	Outlet,
+	createRootRoute,
+	useRouter,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { useTRPC } from "../utils/trpc";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export const Route = createRootRoute({
-  component: Root,
+	component: Root,
 });
 
 function Root() {
-  // const { data: session, isPending } = authClient.useSession();
-  // const router = useRouter();
-  //
-  // useEffect(() => {
-  //   if (isPending) return;
-  //
-  //   if (!session) {
-  //     router.navigate({ to: "/signin" });
-  //   } else {
-  //     router.navigate({ to: "/" });
-  //   }
-  // }, [isPending]);
+	const { data: session, isPending } = authClient.useSession();
+	const router = useRouter();
 
-  const trpc = useTRPC();
-  const { isPending } = useQuery(trpc.file.hello.queryOptions());
+	useEffect(() => {
+		if (isPending) return;
 
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
+		console.log(session);
+		if (!session) {
+			router.navigate({ to: "/signin" });
+		} else {
+			router.navigate({ to: "/" });
+		}
+	}, [isPending]);
 
-  return (
-    <>
-      <nav className="bg-gray-800 text-white p-4">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="text-xl font-bold">My App</div>
-          <div className="flex space-x-4">
-            <Link to="/" className="hover:text-gray-300">Home</Link>
-            <Link to="/posts" className="hover:text-gray-300">Posts</Link>
-            <Link to="/settings" className="hover:text-gray-300">Settings</Link>
-          </div>
-        </div>
-      </nav>
-      <main className="container mx-auto">
-        <Outlet />
-      </main>
-      <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
-      <TanStackRouterDevtools position="bottom-left" />
-    </>
-  );
+	return (
+		<>
+			{session && (
+				<nav className="bg-gray-800 p-4 text-white">
+					<div className="container mx-auto flex items-center justify-between">
+						<div className="font-bold text-xl">My App</div>
+						<div className="flex space-x-4">
+							<Link to="/" className="hover:text-gray-300">
+								Home
+							</Link>
+							<Link to="/posts" className="hover:text-gray-300">
+								Posts
+							</Link>
+							<Link to="/settings" className="hover:text-gray-300">
+								Settings
+							</Link>
+						</div>
+					</div>
+				</nav>
+			)}
+			<main className="container mx-auto">
+				<Outlet />
+			</main>
+			<ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
+			<TanStackRouterDevtools position="bottom-left" />
+		</>
+	);
 }

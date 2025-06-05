@@ -1,20 +1,20 @@
 {
-  "name": "api",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "start": "bun dist/index.js",
-    "dev": "bun src/index.ts",
-    "build": "bun build"
-  },
-  "dependencies": {
-    "@repo/auth": "workspace:*",
-    "@repo/db": "workspace:*",
-    "@repo/trpc": "workspace:*",
-    "dotenv": "^16.4.7",
-    "fastify": "^5.2.1",
-    "fastify-better-auth": "^1.0.1"
-  },
-  "devDependencies": {}
+	"name": "api",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"start": "bun dist/index.js",
+		"dev": "bun src/index.ts",
+		"build": "bun build"
+	},
+	"dependencies": {
+		"@repo/auth": "workspace:*",
+		"@repo/db": "workspace:*",
+		"@repo/trpc": "workspace:*",
+		"dotenv": "^16.4.7",
+		"fastify": "^5.3.3",
+		"@fastify/cors": "^11.0.1"
+	},
+	"devDependencies": {}
 }
