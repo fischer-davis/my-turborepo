@@ -12,4 +12,10 @@ const App = () => (
 </StrictMode>
 );
 
-createRoot(document.getElementById("app")!).render(<App />);
+const rootElement = document.getElementById("app");
+if (rootElement) {
+  createRoot(rootElement).render(<App />);
+} else {
+  console.error("Root element with id 'app' not found in the DOM.");
+}
+
